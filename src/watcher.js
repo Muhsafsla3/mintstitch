@@ -13,17 +13,25 @@ const telegram = require('./telegram');
 
 const STATE_PATH = path.join(__dirname, '..', 'data', 'state.json');
 
+let memoryState = null;
+
 function loadState() {
   try {
     return JSON.parse(fs.readFileSync(STATE_PATH, 'utf8'));
   } catch {
-    return { lastStatus: {}, alerts: [] };
+    return memoryState || { lastStatus: {}, alerts: [] };
   }
 }
 
 function saveState(state) {
-  fs.mkdirSync(path.dirname(STATE_PATH), { recursive: true });
-  fs.writeFileSync(STATE_PATH, JSON.stringify(state, null, 2));
+  memoryState = state;
+  try {
+    fs.mkdirSync(path.dirname(STATE_PATH), { recursive: true });
+    fs.writeFileSync(STATE_PATH, JSON.stringify(state, null, 2));
+  } catch (err) {
+    // Serverless (mis. Vercel): filesystem read-only — lanjut in-memory saja.
+    console.error('[mintstitch] saveState gagal, lanjut in-memory:', err.message);
+  }
 }
 
 /**

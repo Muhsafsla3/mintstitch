@@ -25,7 +25,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 let cache = { statuses: [], updatedAt: null, polling: false };
 
 async function refreshCache() {
-  if (cache.polling) return cache;
+  if (cache.polling) {
+    // Poll sedang jalan (mis. refresh awal saat cold start): tunggu sampai
+    // selesai (maks ~30 dtk) daripada pulang dengan cache kosong.
+    for (let i = 0; i < 60 && cache.polling; i++) {
+      await new Promise((r) => setTimeout(r, 500));
+    }
+    return cache;
+  }
   cache.polling = true;
   try {
     const { statuses } = await pollOnce(WATCHLIST);
@@ -125,7 +132,15 @@ setInterval(() => {
   refreshCache().catch((err) => console.error('[mintstitch] poll berkala gagal:', err.message));
 }, POLL_INTERVAL_MS);
 
-app.listen(PORT, () => {
-  console.log(`[mintstitch] jalan di http://localhost:${PORT}`);
-  console.log(`[mintstitch] watchlist: ${WATCHLIST.length} mint | poll tiap ${POLL_INTERVAL_MS / 1000} dtk | telegram: ${telegram.isConfigured() ? 'terkonfigurasi' : 'tidak dikonfigurasi (opsional)'}`);
-});
+// Listener hanya jalan saat `node server.js` langsung (require.main === module).
+// Saat di-require dari api/index.js (Vercel serverless), app di-export tanpa listen.
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`[mintstitch] jalan di http://localhost:${PORT}`);
+    console.log(`[mintstitch] watchlist: ${WATCHLIST.length} mint | poll tiap ${POLL_INTERVAL_MS / 1000} dtk | telegram: ${telegram.isConfigured() ? 'terkonfigurasi' : 'tidak dikonfigurasi (opsional)'}`);
+  });
+}
+
+// Export untuk serverless (Vercel): api/index.js me-require file ini tanpa
+// menjalankan listener.
+module.exports = app;
