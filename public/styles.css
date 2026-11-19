@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #0f1220; color: #e8eaf2; }
+header { padding: 28px 20px 12px; max-width: 1080px; margin: 0 auto; }
+h1 { margin: 0; font-size: 2rem; }
+.tagline { color: #aab; margin: 6px 0; }
+.meta { color: #889; font-size: .9rem; }
+button { background: #7c5cff; color: #fff; border: 0; border-radius: 8px; padding: 9px 16px; cursor: pointer; font-weight: 600; }
+button:hover { background: #9377ff; }
+main { max-width: 1080px; margin: 0 auto; padding: 0 20px 30px; }
+#cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin: 14px 0 22px; }
+.card { background: #1a1e33; border: 1px solid #2c3252; border-radius: 14px; padding: 16px; }
+.card h3 { margin: 0 0 4px; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+.badge.open { background: #14532d; color: #86efac; }
+.badge.closed { background: #7f1d1d; color: #fca5a5; }
+.badge.unknown { background: #444; color: #ddd; }
+.badge.error { background: #7c2d12; color: #fdba74; }
+.card .nums { font-size: 1.25rem; margin: 10px 0 4px; }
+.card .nums small { color: #aab; font-size: .85rem; }
+.card code { font-size: .8rem; color: #c4b5fd; word-break: break-all; }
+.card .note { color: #aab; font-size: .85rem; }
+.card .err { color: #fca5a5; font-size: .8rem; }
+.panel { background: #1a1e33; border: 1px solid #2c3252; border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+.panel h2 { margin-top: 0; }
+form { display: flex; gap: 8px; flex-wrap: wrap; }
+input[type=text] { flex: 1; min-width: 220px; background: #0f1220; border: 1px solid #2c3252; color: #e8eaf2; border-radius: 8px; padding: 10px 12px; font-size: 1rem; }
+.muted { color: #889; }
+.answer { background: #0f1220; border-left: 4px solid #7c5cff; padding: 12px; border-radius: 8px; margin-top: 12px; }
+table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .92rem; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #2c3252; }
+footer { max-width: 1080px; margin: 0 auto; padding: 0 20px 30px; color: #889; font-size: .85rem; }
+.loading { color: #aab; }

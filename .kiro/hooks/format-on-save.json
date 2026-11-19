@@ -1,0 +1,1 @@
+{"command":"npx --yes prettier --write \"src/**/*.js\" \"server.js\" \"mcp-server/**/*.js\" \"public/**/*.js\" --ignore-path .prettierignore","description":"Format otomatis semua file JS dengan Prettier saat file disimpan","enabled":true,"event":{"patterns":["src/**/*.js","server.js","mcp-server/**/*.js","public/**/*.js"],"type":"fileEdited"},"name":"format-on-save"}

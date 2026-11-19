@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MintStitch — Free Mint Radar (BSC)</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+  <h1>🧵 MintStitch</h1>
+  <p class="tagline">Free Mint Radar — menjahit data on-chain BSC, alert Telegram, dan Tanya Mint dalam satu dashboard.</p>
+  <p class="meta"><span id="updated">memuat…</span> · <button id="refreshBtn" type="button">↻ Refresh sekarang</button> · <span id="tgState"></span></p>
+</header>
+
+<main>
+  <section id="cards" aria-live="polite"><p class="loading">Membaca status mint dari BSC…</p></section>
+
+  <section class="panel">
+    <h2>🔍 Cek eligibility wallet</h2>
+    <p>Tempel alamat BSC lu — gue cek <code>balanceOf</code> di semua kontrak watchlist (tanpa connect wallet, tanpa tanda tangan).</p>
+    <form id="checkForm">
+      <input id="walletInput" type="text" placeholder="0x…" autocomplete="off" spellcheck="false">
+      <button type="submit">Cek wallet</button>
+    </form>
+    <div id="checkResult"></div>
+  </section>
+
+  <section class="panel">
+    <h2>💬 Tanya Mint</h2>
+    <p>Tanya soal mint di watchlist — dijawab dari data live, tanpa API berbayar. Contoh: <em>“apakah Agent Badge masih bisa di-mint?”</em></p>
+    <form id="askForm">
+      <input id="askInput" type="text" placeholder="Tanya soal mint…" autocomplete="off">
+      <button type="submit">Tanya</button>
+    </form>
+    <div id="askResult"></div>
+  </section>
+
+  <section class="panel">
+    <h2>🔔 Alert terakhir</h2>
+    <div id="alerts"><p class="muted">Belum ada alert.</p></div>
+  </section>
+</main>
+
+<footer>
+  <p>MintStitch v0.1.0 — Kiroween 2026 (Frankenstein). Data dibaca live dari public RPC BSC. Bukan saran finansial; free mint tetap butuh gas.</p>
+</footer>
+<script src="/app.js"></script>
+</body>
+</html>

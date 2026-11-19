@@ -1,0 +1,1 @@
+{"mcpServers":{"bsc-read":{"args":["mcp-server/bsc-read/server.js"],"command":"node","cwd":"${workspaceFolder}","disabled":false,"env":{},"name":"bsc-read"}}}

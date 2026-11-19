@@ -1,0 +1,1 @@
+{"command":"npm run lint && npm test","description":"Jalankan lint + smoke test setiap kali file di src/ atau server.js diubah","enabled":true,"event":{"patterns":["src/**/*.js","server.js"],"type":"fileEdited"},"name":"smoke-check"}

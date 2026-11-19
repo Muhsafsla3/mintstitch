@@ -1,0 +1,40 @@
+# MintStitch — Tasks (checklist implementasi)
+
+- [x] 1. Scaffold proyek
+  - [x] 1.1 `package.json` (Node 20, Express, tanpa layanan berbayar)
+  - [x] 1.2 `data/watchlist.json` — seed 6 kontrak BSC terverifikasi
+  - [x] 1.3 `.env.example`, `.gitignore` (`.env` + `node_modules`, `.kiro` TIDAK di-ignore)
+- [x] 2. Pembaca on-chain (`src/bsc.js`)
+  - [x] 2.1 `normalizeAddress` + `padAddressArg` (lowercase programatik, pad 64 hex oleh kode)
+  - [x] 2.2 `eth_call` dengan rotasi 4 RPC + browser User-Agent
+  - [x] 2.3 `readMintStatus` (totalMinted untuk AgentBadge, totalSupply untuk sisanya, flag open bila ada)
+  - [x] 2.4 `checkEligibility` via `balanceOf`
+- [x] 3. Alert Telegram (`src/telegram.js` + `src/watcher.js`)
+  - [x] 3.1 Kirim pesan hanya bila env lengkap; bila tidak, jalan normal
+  - [x] 3.2 Poller 60 dtk, deteksi transisi -> open, alert sekali per transisi
+  - [x] 3.3 State terakhir di `data/state.json`
+- [x] 4. Backend API (`server.js`)
+  - [x] 4.1 Endpoint: health, mints, mints/:id, check, ask, alerts, refresh, watchlist
+  - [x] 4.2 Cache + poller berkala saat server jalan
+- [x] 5. Frontend statis (`public/`)
+  - [x] 5.1 Kartu status live + badge + tombol refresh + auto-refresh 60 dtk
+  - [x] 5.2 Form cek eligibility wallet
+  - [x] 5.3 Form Tanya Mint + daftar alert terakhir
+- [x] 6. Tanya Mint (`src/qa.js`)
+  - [x] 6.1 Pencocokan mint dari nama/alias/kontrak
+  - [x] 6.2 Intent: status, jumlah/supply, kontrak, gratis
+  - [x] 6.3 Fallback daftar mint + contoh pertanyaan
+- [x] 7. MCP server lokal (`mcp-server/bsc-read/server.js`)
+  - [x] 7.1 Tools: `bsc_mint_status`, `bsc_watchlist`, `bsc_check_eligibility`
+  - [x] 7.2 Didaftarkan di `.kiro/settings/mcp.json`
+- [x] 8. Kiro: steering + hooks
+  - [x] 8.1 `steering/product.md`, `steering/tech.md`, `steering/structure.md`
+  - [x] 8.2 Hook format-on-save + hook smoke-check
+- [x] 9. Uji end-to-end
+  - [x] 9.1 `npm install` + `npm start`, curl `/api/health`, `/api/mints`, `/api/check`, `/api/ask`
+  - [x] 9.2 `test/smoke.test.js` — assert endpoint utama + QA + MCP tools/list
+  - [x] 9.3 `npm run lint` (node --check semua file JS)
+- [ ] 10. Repo publik + deploy (oleh koordinator / butuh auth GitHub)
+  - [ ] 10.1 Buat repo publik `mintstitch` di Muhsafsla3, push (BUTUH `gh auth login` — belum ada auth di VM)
+  - [ ] 10.2 Deploy URL app yang jalan (hosting gratis)
+  - [ ] 10.3 Video demo <3 menit + submission Devpost (fase berikutnya)
