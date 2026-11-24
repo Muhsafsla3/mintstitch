@@ -12,9 +12,9 @@ kontrak free-mint, alert Telegram saat window terbuka, cek eligibility
 wallet, dan "Tanya Mint" — tanya soal mint, dijawab dari data live.
 
 ## Demo
-- 🌐 App yang jalan: *(diisi setelah deploy — fase 1 ini fokus repo + app lokal)*
-- 🎥 Video demo: menyusul (<3 menit)
-- 📝 Submission Devpost: menyusul (deadline 5 Des 2026 06:00 WITA)
+- 🌐 App yang jalan: *(menunggu URL publik — deploy butuh OAuth Vercel, lihat `SUBMIT-READY.md` §2)*
+- 🎥 Video demo: menyusul (<3 menit, shot list di `SUBMIT-READY.md` §5)
+- 📝 Submission Devpost: menyusul (deadline 5 Des 2026 06:00 WITA; semua materi siap di `SUBMIT-READY.md`)
 
 ## Fitur
 | Fitur | Status |
