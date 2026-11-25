@@ -12,7 +12,7 @@ kontrak free-mint, alert Telegram saat window terbuka, cek eligibility
 wallet, dan "Tanya Mint" — tanya soal mint, dijawab dari data live.
 
 ## Demo
-- 🌐 App yang jalan: *(menunggu URL publik — deploy butuh OAuth Vercel, lihat `SUBMIT-READY.md` §2)*
+- 🌐 App yang jalan: **https://mintstitch-gjlp8y7x4-muhsafsupardi-4561s-projects.vercel.app** (Vercel, publik, terverifikasi 25 Nov 2026 — `/api/health` ok:true, `/api/mints` 6 mint live)
 - 🎥 Video demo: menyusul (<3 menit, shot list di `SUBMIT-READY.md` §5)
 - 📝 Submission Devpost: menyusul (deadline 5 Des 2026 06:00 WITA; semua materi siap di `SUBMIT-READY.md`)
 
