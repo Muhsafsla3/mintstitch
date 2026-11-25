@@ -94,13 +94,23 @@ document.getElementById('askForm').addEventListener('submit', async (e) => {
   const out = document.getElementById('askResult');
   if (!q) return;
   out.innerHTML = '<p class="muted">Mencari jawaban dari data live…</p>';
-  const res = await fetch('/api/ask', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question: q }),
-  });
-  const data = await res.json();
-  out.innerHTML = `<div class="answer">${escapeHtml(data.answer || data.error || 'Tidak ada jawaban.')}</div>`;
+  try {
+    // Timeout 25 dtk + pesan gagal yang jujur — jangan stuck selamanya
+    // bila server sedang cold start (kejadian live 25 Nov 2026).
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 25000);
+    const res = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q }),
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+    const data = await res.json();
+    out.innerHTML = `<div class="answer">${escapeHtml(data.answer || data.error || 'Tidak ada jawaban.')}</div>`;
+  } catch (err) {
+    out.innerHTML = '<div class="answer">Maaf, jawaban tidak sempat dimuat — coba lagi sebentar.</div>';
+  }
 });
 
 loadHealth();

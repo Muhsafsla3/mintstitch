@@ -105,7 +105,23 @@ app.get('/api/check', async (req, res) => {
 app.post('/api/ask', async (req, res) => {
   const question = (req.body && req.body.question) || '';
   if (!question.trim()) return res.status(400).json({ error: 'question wajib diisi' });
-  if (!cache.statuses.length) await refreshCache();
+  // Jawab dari cache bila ada; JANGAN blokir pada poll live penuh.
+  // Di serverless (Vercel) cold start, poll 6 mint berurutan bisa
+  // melampaui batas durasi fungsi — request menggantung dan frontend
+  // stuck di "Mencari jawaban…" (kejadian live 25 Nov 2026).
+  // Bila cache kosong, beri poll maksimal 20 dtk; bila tetap kosong,
+  // kembalikan 503 yang jujur supaya frontend bisa menampilkan pesan.
+  if (!cache.statuses.length) {
+    try {
+      await Promise.race([
+        refreshCache(),
+        new Promise((r) => setTimeout(r, 20000)),
+      ]);
+    } catch { /* abaikan — jawab dari data yang ada */ }
+  }
+  if (!cache.statuses.length) {
+    return res.status(503).json({ error: 'Data live sedang dimuat (cold start), coba lagi sebentar.' });
+  }
   const result = answer(question, cache.statuses, WATCHLIST);
   res.json({ question, ...result, answeredAt: new Date().toISOString() });
 });
