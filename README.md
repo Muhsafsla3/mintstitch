@@ -13,7 +13,7 @@ wallet, dan "Tanya Mint" — tanya soal mint, dijawab dari data live.
 
 ## Demo
 - 🌐 App yang jalan: **https://mintstitch-gjlp8y7x4-muhsafsupardi-4561s-projects.vercel.app** (Vercel, publik, terverifikasi 25 Nov 2026 — `/api/health` ok:true, `/api/mints` 6 mint live)
-- 🎥 Video demo: menyusul (<3 menit, shot list di `SUBMIT-READY.md` §5)
+- 🎥 Video demo: **`video/demo-video.mp4`** (1:49, 1920×965, H.264, direkam 25 Nov 2026 dari URL publik — dashboard, refresh, cek wallet, Tanya Mint, /api/mints, .kiro/) — **perlu upload ke YouTube Public (channel tabibqiu9)** sebelum submit
 - 📝 Submission Devpost: menyusul (deadline 5 Des 2026 06:00 WITA; semua materi siap di `SUBMIT-READY.md`)
 
 ## Fitur

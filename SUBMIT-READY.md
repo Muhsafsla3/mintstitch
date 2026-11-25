@@ -15,29 +15,25 @@ Devpost terdaftar atas nama: **M syafrul supardi**. Kategori: **Frankenstein**.
 | `/.kiro` di root repo (specs, steering, hooks, MCP settings) | ✅ DONE — 9 file ter-commit, TIDAK di `.gitignore` |
 | Tanpa secret di repo | ✅ DONE — tidak ada `.env` (`.env` ada di `.gitignore`, 0 file `.env` ter-commit) |
 | Vercel-ready (serverless adapter + `vercel.json`) | ✅ DONE — commit 32da323 |
-| **URL demo publik** | ❌ **BLOKIR — butuh OAuth Vercel (lihat §2)** |
-| Video demo <3 menit (YouTube publik) | ❌ BELUM — shot list siap di §5, rekam SETELAH URL publik ada |
-| Submit Devpost | ❌ BELUM — tunggu URL + video; JANGAN submit sebelumnya |
+| **URL demo publik** | ✅ DONE — https://mintstitch-gjlp8y7x4-muhsafsupardi-4561s-projects.vercel.app (Vercel, terverifikasi 25 Nov 2026: `/api/health` ok:true, `/api/mints` 6 mint live) |
+| Video demo <3 menit (YouTube publik) | ⚠️ **FILE SIAP, BELUM UPLOAD** — `video/demo-video.mp4` (1:49, 1920×965, H.264, decode OK, direkam 25 Nov 2026 dari URL publik). Upload ke YouTube Public (channel tabibqiu9) via browser task, lalu masukkan link ke form. |
+| Submit Devpost | ❌ BELUM — tunggu link video YouTube; JANGAN submit sebelumnya |
 
-## 2. BLOKIR: deploy butuh sambung Vercel (OAuth)
+## 2. Deploy — SELESAI 24 Nov 2026 (dulu blokir OAuth, kini beres)
 
-Kenapa blokir: Vercel di VM ini `not_connected`. Tunnel publik dari VM sudah
-dicoba semua 19 Nov dan GAGAL (cloudflared/localtunnel/localhost.run — lihat
-`DEPLOY.md`). Netlify CLI tidak terpasang & tidak ada auth; Render butuh akun.
-Jalur yang sudah disiapkan repo ini adalah **Vercel (gratis, tanpa kartu)**.
+URL publik: **https://mintstitch-gjlp8y7x4-muhsafsupardi-4561s-projects.vercel.app**
+(deploy via dashboard import repo Muhsafsla3/mintstitch, akun muhsafsupardi-4561;
+Vercel auto-deploy tiap push ke master — terverifikasi 25 Nov 2026).
 
-**Yang harus dilakukan parent/user (sekali saja):**
-1. Buka link sambung ini di browser dan login Vercel (atau buat akun gratis):
-   **https://agent.meta.ai/connectors/connect/vercel**
-2. Setelah tersambung, dari root repo jalankan: `vercel --prod`
-   (atau import repo `Muhsafsla3/mintstitch` di dashboard Vercel).
-3. Env: TIDAK ADA yang wajib. Opsional: `TELEGRAM_BOT_TOKEN` +
-   `TELEGRAM_CHAT_ID` (alert "WINDOW OPEN"; app jalan tanpanya).
-4. Verifikasi: `GET <url>/api/health` → `ok:true`;
-   `GET <url>/api/mints` → 6 mint. Catatan: cold start pertama bisa ~7 dtk
-   (poll BSC); request berikutnya pakai cache.
+**Perbaikan 25 Nov 2026 (commit 84e316a):** `/api/ask` sempat menggantung di
+cold start Vercel (poll 6 mint berurutan > batas durasi fungsi) — frontend
+stuck di "Mencari jawaban…". Diperbaiki: ask jawab dari cache, poll dibatasi
+race 20 dtk, 503 jujur bila cache kosong; frontend timeout 25 dtk + pesan
+gagal. Terverifikasi live: 3/3 POST /api/ask HTTP 200 ~1 dtk. `npm test` 6/6.
 
-Setelah URL didapat, isi ke `README.md` bagian Demo + ke form Devpost.
+Jalur lama (bila deploy putus — import ulang repo di dashboard Vercel;
+env TIDAK ADA yang wajib, opsional TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID).
+Verifikasi: `GET <url>/api/health` → `ok:true`; `GET <url>/api/mints` → 6 mint.
 
 ## 3. Deskripsi submission (Bahasa Inggris — siap tempel ke Devpost)
 
